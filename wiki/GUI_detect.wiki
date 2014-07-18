@@ -13,7 +13,7 @@ The quick manual version:
 The quick automated version:
 
   #	Sort all of your experiments into separate folders.
-  #     Make sure any non-trace file have a name starting with a tilde ~
+  #     Make sure any non-trace files or folders have a name starting with a tilde ~ so that the script will ignore them.
   #	Open each folder and select your detection parameters for that particular folder. For each folder check your detection parameters by finding events in several traces. Once you are happy click *Create PAR*. 
   #	Repeat step 2 for all of the different folders.
   #	Go to the root directory containing all of these folders and check *Auto Save* and *Cycle Subfolders*.
