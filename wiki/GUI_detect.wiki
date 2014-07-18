@@ -1,0 +1,20 @@
+Make sure that the folder containing all of the Matlab scripts is in the Matlab path. Go to the *File Menu -> Set Path*. Click *Add with Subfolders...* and select the proper folder and then Save.
+
+The quick manual version:
+
+  #	Select file type, filter frequency, and voltage.
+  #	Open the directory.
+  #	Double click on a trace file and/or select a segment.
+  #	Click *Find Events* and check that events found are not junk.
+  #	Click *Add to Master Trace*.
+  #	Repeat steps 3 to 5 for all of the traces you want to analyze.
+  #	Click *Save* and the program will export all detected events.
+
+The quick automated version:
+
+  #	Sort all of your experiments into separate folders.
+  #     Make sure any non-trace file have a name starting with a tilde ~
+  #	Open each folder and select your detection parameters for that particular folder. For each folder check your detection parameters by finding events in several traces. Once you are happy click *Create PAR*. 
+  #	Repeat step 2 for all of the different folders.
+  #	Go to the root directory containing all of these folders and check *Auto Save* and *Cycle Subfolders*.
+  #	Click *Cycle All*.
