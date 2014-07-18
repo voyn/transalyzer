@@ -1,16 +1,15 @@
-
-File Preparation
+[File_Preparation File Preparation]
 
 [GUI_detect Guide to GUI_detect]
 
-Guide to GUI_events
+[GUI_events Guide to GUI_events]
 
-Guide to GUI_eventrate
+[GUI_eventrate Guide to GUI_eventrate]
 
-Guide to GUI_gaussian
+[GUI_gaussian Guide to GUI_gaussian]
 
-Guide to GUI_ghost
+[GUI_ghost Guide to GUI_ghost]
 
-Guide to GUI_noise
+[GUI_noise Guide to GUI_noise]
 
-Guide to GUI_localstructures
+[GUI_localstructures Guide to GUI_localstructures]
