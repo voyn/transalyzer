@@ -60,22 +60,22 @@ Now the files are ready to analyze. Open the Detect Events script (GUI_detect) a
       * Moving STD Hist Peak: Calculate STD over a local window with size in points given in the text box below. Take the maximum point of the local STD histogram. The STD Hist button will open a plot with these peaks. This should be used to set the proper binning. http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_std.png
       * Moving STD: NOT IMPLEMENTED YET!
 
-    * Once your detection parameters are set you should save them by clicking Create PAR. This will create a file called ~detect.par which contains all of the detection settings you just chose. To reload these detection settings at a later date, use the Load PAR button.
+    * Once your detection parameters are set you should save them by clicking *Create PAR*. This will create a file called ~detect.par which contains all of the detection settings you just chose. To reload these detection settings at a later date, use the *Load PAR* button.
 
-    * Next you can double click a trace file to plot it. The magenta line at the center of the trace will show the moving average, with the two green lines showing the moving average +/- sigma. The red line shows the detection level. These lines can be removed by unselecting Diagnostic Plot. At any time you can open this plot externally by selecting Plot Trace Win.
-    * Clicking Find Events will then detect all events using the specified parameters.
-    * Once events are found you can browse through them with the Event Info panel buttons Up and Down. A variety of event information is displayed. The plot of the event can be opened externally by clicking Plot Event.
+    * Next you can double click a trace file to plot it. The magenta line at the center of the trace will show the moving average, with the two green lines showing the moving average +/- sigma. The red line shows the detection level. These lines can be removed by unselecting *Diagnostic Plot*. At any time you can open this plot externally by selecting *Plot Trace Win*.
+    * Clicking *Find Events* will then detect all events using the specified parameters.
+    * Once events are found you can browse through them with the Event Info panel buttons *Up* and *Down*. A variety of event information is displayed. The plot of the event can be opened externally by clicking *Plot Event*.
     * In the trace plot events will highlighted in red.
-    * Once you are satisfied with the detected events, you can click Add to Master Trace. This creates a trace file with all of the detected events concatenated together. At any time you can browse either the events detected in the current trace file loaded (local) or the events detected since the start of the analysis (master). To plot the master trace file click either Plot Master Win (external plot) or Plot Master Here (in GUI).
-    * This process can be repeated until you have sufficient events. The events in the master trace can be saved at any time by clicking Save. This creates a new directory called ~transalyzed-10000Hz. Where a filtering frequency of 10000Hz was used in this example.
+    * Once you are satisfied with the detected events, you can click *Add to Master Trace*. This creates a trace file with all of the detected events concatenated together. At any time you can browse either the events detected in the current trace file loaded (local) or the events detected since the start of the analysis (master). To plot the master trace file click either *Plot Master Win* (external plot) or *Plot Master Here* (in GUI).
+    * This process can be repeated until you have sufficient events. The events in the master trace can be saved at any time by clicking *Save*. This creates a new directory called ~transalyzed-10000Hz. Where a filtering frequency of 10000Hz was used in this example.
     * To export the events to OpenNanopore select OpenNanopore files. This will create a directory called OpenNanopore within the ~transalyzed-10000Hz directory once you save the master trace. There will be two files:
-      * events.mat – a trace file containing all of the events
-      * OpenNanopore_parameters.txt – the parameters to be used in the detection
-    * You can analyze all of the trace files in a directory by clicking Cycle All. If the Auto Save option is turned on it will automatically save the master file at the end, otherwise you will have to do it manually by clicking Save. *Note:* Cycle All is the same as manually loading each file, clicking Find Events and then Add to Master Trace.
+      * *events.mat* – a trace file containing all of the events
+      * *OpenNanopore_parameters.txt* – the parameters to be used in the detection
+    * You can analyze all of the trace files in a directory by clicking *Cycle All*. If the *Auto Save* option is turned on it will automatically save the master file at the end, otherwise you will have to do it manually by clicking Save. *Note:* *Cycle All* is the same as manually loading each file, clicking *Find Events* and then *Add to Master Trace*.
 
-Analysis can be automated across multiple experiments (each in its own folder) by first creating PAR files in each folder to be analyzed, then going to the root folder and selecting Cycle All while the Auto Save and Cycle Subfolders options are on. *Note:* Folders not containing a PAR file will not be analyzed.
+Analysis can be automated across multiple experiments (each in its own folder) by first creating PAR files in each folder to be analyzed, then going to the root folder and selecting *Cycle All* while the *Auto Save* and *Cycle Subfolders* options are on. *Note:* Folders not containing a PAR file will not be analyzed.
 
-*Note:* Clicking Dump Variables will save all of the working variables to the current Matlab workspace.
+*Note:* Clicking *Dump Variables* will save all of the working variables to the current Matlab workspace.
 
 These are the files created when you click *Save*:
 
