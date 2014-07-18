@@ -54,12 +54,16 @@ Now the files are ready to analyze. Open the Detect Events script (GUI_detect) a
       * Manual (Locked): Always use the value in the text box as the value of the baseline.
       * Current Hist Max: Take the maximum value of the current histogram as the baseline value. Set the number of bins such that the resolution is sufficient to provide a good estimate. *Note:* This will not work if there are more points within the events than the baseline in a given trace. The current histogram button will open a plot showing the peaks. This should be used to set the proper binning.
  
+http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_current.png
+
     * Sigma (How to detect the value of the Standard Deviation / Noise Level):
       * Trace STD: Take the standard deviation of the entire trace. This only works if you have a very stable baseline.
       * Manual (Initial Guess): Enter a value for sigma in the text box. The first loop of the detection will use this value. Subsequent loops will calculate sigma on the global trace (on the modified trace) *Note:* This is to be used for a trace with many events but stable baseline.
       * Manual (Locked): Always use the value in the text box as the value of sigma.
       * Moving STD Hist Peak: Calculate STD over a local window with size in points given in the text box below. Take the maximum point of the local STD histogram. The STD Hist button will open a plot with these peaks. This should be used to set the proper binning.
  
+http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_std.png
+
       * Moving STD: NOT IMPLEMENTED YET!
 
     * Once your detection parameters are set you should save them by clicking Create PAR. This will create a file called ~detect.par which contains all of the detection settings you just chose. To reload these detection settings at a later date, use the Load PAR button.
