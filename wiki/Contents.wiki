@@ -1,3 +1,5 @@
+[Installation]
+
 [File_Preparation File Preparation]
 
 [GUI_detect Guide to GUI_detect]
