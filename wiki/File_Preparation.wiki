@@ -6,7 +6,7 @@ Move all IV curves and noise traces into a new folder. Move each of the traces c
 
 http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_folder_screenshot.png
 
-If you are recording using LabView, set each DATALOG file to be around 10Mb at 500kHz acquisition. Before starting analysis, the experimental data must be in the proper order when you look at the directory in Matlab.
+If you are recording using LabView, set each DATALOG file to be around 10Mb at 500kS/s acquisition. Before starting analysis, the experimental data must be in the proper order when you look at the directory in Matlab.
 
 If your files end in numbers, make sure they use sufficient leading zeros to have the proper file order. If you need to add some leading zeros you can use the following procedure: 
 
