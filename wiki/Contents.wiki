@@ -1,8 +1,7 @@
 
-
 File Preparation
 
-Guide to GUI_detect
+[GUI_detect Guide to GUI_detect]
 
 Guide to GUI_events
 
