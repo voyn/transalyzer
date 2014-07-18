@@ -11,22 +11,28 @@ If your files end in numbers, make sure they use sufficient leading zeros to hav
 Once your files no longer contain periods in their names, select all of your trace files and uncheck Extension(11), check RegEx(1) and uncheck the Include Ext option. The new file names will be shown on the right side of the file list. Files that will have their name changed will be colored green. Three RegEx(1) filters will need to be run:
 
 For single digits (will change 1 into 0001)
-{{{Match:
+{{{
+Match:
 (.+)\s(\d)$
 Replace:
-\1 000\2}}}
+\1 000\2
+}}}
 
 For two digits (will change 12 into 0012)
-{{{Match:
+{{{
+Match:
 (.+)\s(\d\d)$
 Replace:
-\1 00\2}}}
+\1 00\2
+}}}
 
 
 For three digits (will change 123 into 0123)
-{{{Match:
+{{{
+Match:
 (.+)\s(\d\d\d)$
 Replace:
-\1 0\2}}}
+\1 0\2
+}}}
 
  
