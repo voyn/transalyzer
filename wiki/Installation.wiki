@@ -1,13 +1,1 @@
-#summary One-sentence summary of this page.
-
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Make sure that the folder containing all of the Matlab scripts is in the Matlab path. Go to the *File Menu -> Set Path*. Click *Add with Subfolders...* and select the proper folder and then Save.
