@@ -1,5 +1,3 @@
-Make sure that the folder containing all of the Matlab scripts is in the Matlab path. Go to the *File Menu -> Set Path*. Click *Add with Subfolders...* and select the proper folder and then Save.
-
 http://ceesdekkerlab.tudelft.nl/wp-content/uploads/GUI_detect.png
 
 =Quick manual version=
