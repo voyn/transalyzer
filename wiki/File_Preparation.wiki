@@ -2,7 +2,7 @@
 
 Move all IV curves and noise traces into a new folder. Move each of the traces corresponding to a different voltage or experiment into its own folder as shown below.
 
-Note: The program will ignore any files or folders if their name starts with a tilde ~
+*Note*: The program will ignore any files or folders if their name starts with a tilde ~
 
 http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_folder_screenshot.png
 
