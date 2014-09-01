@@ -1,0 +1,28 @@
+#summary One-sentence summary of this page.
+
+= Frequently Asked Questions =
+
+  # How can I open my file type with Transalyzer?
+
+If your data is stored in a file type other than those currently supported, you must modify the fun_load_trace_file function in GUI_detect. Add a new case at the end of the switch statement:
+
+{{{
+        % get the trace file type
+        file_type = get(handles.pop_file_type,'Value');
+                
+        switch  file_type % switch based on type of trace
+                    
+             case # % add a new case after last case statement
+}}}
+
+Your code may use two inputs:
+    # filename - complete path to trace file
+    # currentsegment - which segment of the trace to open
+
+And generate the following vectors and variables:
+    # handles.file_load_successful - file opened correctly 1, or not 0
+    # handles.trace - current values of the trace in nA
+    # handles.time_vector - timepoints for each current point
+    # handles.timestep - time between each current point
+    # handles.total_number_of_segments - total number of segments in this trace
+
