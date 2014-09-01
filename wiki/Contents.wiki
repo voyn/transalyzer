@@ -15,3 +15,5 @@
 [GUI_noise Guide to GUI_noise]
 
 [GUI_localstructures Guide to GUI_localstructures]
+
+[FAQ FAQ]
