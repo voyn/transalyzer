@@ -26,6 +26,8 @@ And generate the following vectors and variables:
     # handles.timestep - time between each current point
     # handles.total_number_of_segments - total number of segments in this trace
 
+Finally, you must open GUI_detect.fig using [http://www.mathworks.nl/help/matlab/ref/guide.html guide] and add your file type to the list of types in the drop down menu (_handles.pop_file_type_).
+
 ==2. How do I diagnose a programming issue?==
 
 In Matlab GUIs, data is typically stored in structures called [http://www.mathworks.nl/help/matlab/ref/guidata.html handles], which can not be directly accessed from the base workspace. One useful method for debugging is to pass the variables used into the base workspace just before the point where the error occurs. This can be done using the [http://www.mathworks.nl/help/matlab/ref/assignin.html assignin] function:
