@@ -28,7 +28,7 @@ And generate the following vectors and variables:
 
 ==2. How do I diagnose a programming issue?==
 
-In Matlab data is typically stored in structures called [http://www.mathworks.nl/help/matlab/ref/guidata.html handles], which can not be directly accessed from the workspace. One useful method for debugging is to pass the variables used into the base workspace just before the point where the error occurs. This can be done using the [http://www.mathworks.nl/help/matlab/ref/assignin.html assignin] function:
+In Matlab GUIs, data is typically stored in structures called [http://www.mathworks.nl/help/matlab/ref/guidata.html handles], which can not be directly accessed from the base workspace. One useful method for debugging is to pass the variables used into the base workspace just before the point where the error occurs. This can be done using the [http://www.mathworks.nl/help/matlab/ref/assignin.html assignin] function:
 {{{
 assignin('base', 'name_of_variable_in_base_workspace', handles.name_of_variable_in_GUI)
 }}}
