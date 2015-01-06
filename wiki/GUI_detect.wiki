@@ -83,42 +83,42 @@ A copy of the PAR file used.
 *analysis_events*
 Each detected event is a new row with the following columns:
 {{{
-Column 1 Avarage Amplitude with local minima method 
-Column 2 Maximum Amplitude for the event
-Column 3 Integral of event 
-Column 4 FWHM Dwell time 
-Column 5 Event Baseline 
-Column 6 Detection Level
+Column 1 Avarage Amplitude with local minima method (nA)
+Column 2 Maximum Amplitude for the event (nA)
+Column 3 Integral of event in nA*ms (pC)
+Column 4 FWHM Dwell time (ms)
+Column 5 Event Baseline (nA)
+Column 6 Detection Level (nA)
 Column 7 Event Type (not used?)
-Column 8 start point index in rawtrace  
+Column 8 start point index in rawtrace 
 Column 9 end point index in rawtrace  
 }}}
 
 *analysis_extra_info.txt*
 {{{
 Column 1 file number 
-Column 2 Resistance for this trace file
-Column 3 Total time of this local trace 
-Column 4 Total time passed in entire experiment 
+Column 2 Resistance for this trace file (Mohms)
+Column 3 Total time of this local trace (s)
+Column 4 Total time passed in entire experiment (s)
 Column 5 Number of local minima in event 
 Column 6 Location of first local minima
 Column 7 Location of last local minima
-Column 8 Dwell time calculated using xend – xstart  
+Column 8 Dwell time calculated using xend – xstart (ms)
 Column 9 Amplitude in nA, calculated by Integral/FWHM_Dwell_time
 }}}
 
 *analysis_events_min_max*
 {{{
-Column 1 min inside event
-Column 2 max inside event
-Column 3 min in extrapoints
-Column 4 max in extrapoints
-Column 5 std in extrapoints
-Column 6 mean in extrapoints
-Column 7 std in extrapoints start
-Column 8 mean extrapoints start
-Column 9 std in extrapoints end
-Column 10 mean extrapoints end
+Column 1 min current level inside event
+Column 2 max current level inside event
+Column 3 min current level in extrapoints
+Column 4 max current level in extrapoints
+Column 5 std of current in extrapoints
+Column 6 mean current level in extrapoints
+Column 7 std of current in extrapoints at start (before translocation)
+Column 8 mean current level in extrapoints at start (before translocation)
+Column 9 std of current in extrapoints at end (after translocation)
+Column 10 mean current level in extrapoints at end (after translocation)
 }}}
 
 *analysis_files_info.txt*
