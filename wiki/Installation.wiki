@@ -1,3 +1,5 @@
+First download the latest release and unzip it into a directory on your hard drive.
+
 Make sure that the folder containing all of the Matlab scripts is in the Matlab path. Go to the *File Menu -> Set Path*. Click *Add with Subfolders...* and select the proper folder and then *Save*.
 
 Please download and install [http://nl.mathworks.com/matlabcentral/fileexchange/23629-export-fig export_fig] to ensure proper export of figures. The export_fig dependencies must also be installed ([http://www.ghostscript.com ghostscript] and [http://www.foolabs.com/xpdf  pdftops]) since vector formats (eps and pdf) are used.
