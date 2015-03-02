@@ -1219,8 +1219,6 @@ function fun_events_detect(plottingon)
                         event_time_vect = 0:handles.timestep*1000:(event_end - event_start)*handles.timestep*1000; % build a time vector (ms)
 
                         event_average = baseline - mean(event_trace); % event average
-                        
-                        event_max = baseline - min(event_trace); % event max
 
                         % is this an up or down event
                         up_or_down = (-1*sign(event_average))/2+0.5;
@@ -1234,6 +1232,7 @@ function fun_events_detect(plottingon)
                             detectionlevel = (handles.trace_runavg_fwd(starting_edge_index(i)) + handles.peakdetectionfactor*handles.sigma_window);
 
                             [lmval,minindex] = lmax(event_trace, 0); % calc local maxima
+                            event_max = max(event_trace) - baseline; % event max
 
                         else % down events
 
@@ -1241,6 +1240,7 @@ function fun_events_detect(plottingon)
                             detectionlevel = (handles.trace_runavg_fwd(starting_edge_index(i)) - handles.peakdetectionfactor*handles.sigma_window);
 
                             [lmval,minindex] = lmin(event_trace, 0);  % calc local minima
+                            event_max = baseline - min(event_trace); % event max
 
                         end
 
