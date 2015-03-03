@@ -34,17 +34,7 @@
 
 
 
-function [trace, time_vector, timestep, code] = readlabviewbinaries_recapture_readall(filename)
-
-%  clear all
-%  clc
-% % 
-%  filename = 'K:\bn\cd\Shared\calin\Ludo and Maarten\resistor_-50mV_new_format';
-%  startrecordnumber = 1;
-% numberofrecordstoread = 314;
-
-%filename = 'K:\ns\mb\mb-shared\Calin\Scripts\Matlab_Transalyzer\old\old-data-spikes\yesspikes';
-%filename = 'L:\NS\mb\Calin\Data\NanoPore\2011\07072011-samplerate-and-salt-series\10Mohm-120kHz\10Mohm-resistor-120kHzSAM 100 mV 0002';
+function [trace, time_vector, timestep, code] = readlabviewbinaries_readall(filename)
 
 trace = 0;
 time_vector = 0;

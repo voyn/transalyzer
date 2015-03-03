@@ -32,22 +32,7 @@
 % FF FF FF FF variable dimension size
 
 
-%filename = 'K:\bn\cd\Shared\calin\Ludo and Maarten\Recap_data\20120419 DNA-2nd-test\06';
-
-%filename = 'K:\bn\cd\Shared\calin\Ludo and Maarten\Recap_data\20120418 lambda DNA first test\NW7-1MKCl-lDNA-2';
-
 function [records, recordtime, timestep] = readlabviewbinaries_generate_position_file(filename)
-
-%  clear all
-%  clc
-% % 
-%  filename = 'K:\bn\cd\Shared\calin\Ludo and Maarten\Recap_data\20120419 DNA-2nd-test\06';
-%  startrecordnumber = 3;
-% numberofrecordstoread = 10;
-
-%filename = 'K:\ns\mb\mb-shared\Calin\Scripts\Matlab_Transalyzer\old\old-data-spikes\yesspikes';
-%filename = 'L:\NS\mb\Calin\Data\NanoPore\2011\07072011-samplerate-and-salt-series\10Mohm-120kHz\10Mohm-resistor-120kHzSAM 100 mV 0002';
-
 
 trace = 0;
 time_vector = 0;

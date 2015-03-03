@@ -36,20 +36,7 @@
 
 function [numrecords, recordtime, timestep] = readlabviewbinaries_numrecords_value(filename)
 
-%  clear all
-%  clc
-% % 
-%  filename = 'K:\bn\cd\Shared\calin\Ludo and Maarten\resistor_-50mV_new_format';
-%  startrecordnumber = 3;
-% numberofrecordstoread = 10;
-
-%filename = 'K:\ns\mb\mb-shared\Calin\Scripts\Matlab_Transalyzer\old\old-data-spikes\yesspikes';
-%filename = 'L:\NS\mb\Calin\Data\NanoPore\2011\07072011-samplerate-and-salt-series\10Mohm-120kHz\10Mohm-resistor-120kHzSAM 100 mV 0002';
-
-trace = 0;
-time_vector = 0;
 timestep = 0;
-freqver = 0;
 fid = fopen(filename,'r','b');
 
 if fid > 2
