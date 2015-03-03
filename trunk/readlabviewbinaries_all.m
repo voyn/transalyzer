@@ -34,7 +34,7 @@
 
 
 
-function [trace, time_vector, timestep, code] = readlabviewbinaries(filename, startrecordnumber, numberofrecordstoread)
+function [trace, time_vector, timestep, code] = readlabviewbinaries_all(filename, startrecordnumber, numberofrecordstoread)
 
 %  clear all
 %  clc
@@ -172,6 +172,8 @@ if fid > 2
 else
     code = 0;
 end
+
+% disp(num2str(record_size))
 
 %difference_pointers = recendpointer - recstartpointer;
 %plot(trace)
