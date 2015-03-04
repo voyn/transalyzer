@@ -1425,7 +1425,7 @@ function fun_events_detect(plottingon)
                         % 4 dwell time old (between start and stop)
                         % 5 amplitude good (int_over_FWHM)
 
-                        previous_end_point = event_end; % save end, for the event overlap check
+                        
                         
                     else % this is reached if it is not the last iteration
                          
@@ -1440,6 +1440,9 @@ function fun_events_detect(plottingon)
                         
                         
                     end
+                    
+                    previous_end_point = event_end; % save end, for the event overlap check
+                    
                 end
             end
         end % all possible events analyzed
@@ -1598,6 +1601,8 @@ function fun_events_detect(plottingon)
     
     if isfield(handles,'event_info')
         [event_counter cc] = size(handles.event_info); % count the rows
+        assignin('base', 'event_info', handles.event_info)
+        assignin('base', 'starting_edge_index', starting_edge_index)
         set(handles.text_number_of_events_found,'String',num2str(event_counter)) % update event counter
     else
         set(handles.text_number_of_events_found,'String','0') % :'(
