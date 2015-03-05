@@ -1429,15 +1429,19 @@ function fun_events_detect(plottingon)
                         
                     else % this is reached if it is not the last iteration
                          
-                        event_counter = event_counter + 1; % increment event counter
-                        handles.event_info(event_counter,:) = [0 0 0 0 0 0 0 event_start event_end];
-                        
-                        % make new trace file for moving average
-                        handles.filtered_trace_events_replaced_with_baseline(event_start:event_end) = handles.trace_runavg_fwd(event_start);
-                        
-                        % make new trace file for sigma
-                        handles.filtered_trace_events_replaced_with_NaN(event_start:event_end) = NaN;
-                        
+                        if previous_end_point < event_start
+                                       
+                            disp(strcat('prevend',num2str(previous_end_point),'start',num2str(event_start),'evcount',num2str(event_counter)))
+                            
+                            event_counter = event_counter + 1; % increment event counter
+                            handles.event_info(event_counter,:) = [0 0 0 0 0 0 0 event_start event_end];
+
+                            % make new trace file for moving average
+                            handles.filtered_trace_events_replaced_with_baseline(event_start:event_end) = handles.trace_runavg_fwd(event_start);
+
+                            % make new trace file for sigma
+                            handles.filtered_trace_events_replaced_with_NaN(event_start:event_end) = NaN;
+                        end
                         
                     end
                     
@@ -1547,6 +1551,9 @@ function fun_events_detect(plottingon)
                     
                 otherwise
             end
+            if isfield(handles,'event_info')
+                handles = rmfield (handles,'event_info'); % if this is not last iter, clear event_info
+            end
         end
     end
     
@@ -1601,8 +1608,8 @@ function fun_events_detect(plottingon)
     
     if isfield(handles,'event_info')
         [event_counter cc] = size(handles.event_info); % count the rows
-        assignin('base', 'event_info', handles.event_info)
-        assignin('base', 'starting_edge_index', starting_edge_index)
+%         assignin('base', 'event_info', handles.event_info)
+%         assignin('base', 'starting_edge_index', starting_edge_index)
         set(handles.text_number_of_events_found,'String',num2str(event_counter)) % update event counter
     else
         set(handles.text_number_of_events_found,'String','0') % :'(
@@ -1614,6 +1621,10 @@ function fun_events_detect(plottingon)
     if (event_counter > 0) && plottingon % if plotting is turned on
         fun_trace_plot('here',1) % show the events on the trace
     end
+    
+    
+    
+    
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2329,6 +2340,7 @@ function fun_events_add_to_master_file()
         event_info_temp = event_info_temp(:,1:9); % remove column used to sort
         event_info_time = sortrows(handles.event_info,8); % remember how you sorted everything
 
+%           assignin('base', 'event_info', handles.event_info)
         handles.event_more_info(:,6) = handles.event_info(:,8); % add the starting points to more_info matrix so it can be sorted 
         handles.event_more_info = sortrows(handles.event_more_info,6); % sort it the same way you sorted the last one
         handles.event_more_info = handles.event_more_info(:,1:5); % remove the starting points column
