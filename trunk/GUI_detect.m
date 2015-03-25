@@ -373,14 +373,23 @@ function fun_load_trace_file(filename, ~, currentsegment)
                         
                         % binary files (like ABF) are fast
                         
+                        % this will open ABF files where the only channel
+                        % is current in units of pA
+                        
                         segment_size_in_sec = str2double(get(handles.edit_segment_size_in_sec,'String')); % how big each segment is in seconds
                         
                         if currentsegment == 0 % read segment 1 (first 3 sec)
+                            
+                            % NOTE: you may need to modify this if you
+                            % record more than just the current channel
                             
                             [handles.trace,si,lActualAcqLength]=abfload(filename,'start',0,'stop',segment_size_in_sec);
                             set(handles.edit_segment_number,'String','1'); % update segment number textbox
                             
                         else % read some other segment #
+                            
+                            % NOTE: you may need to modify this if you
+                            % record more than just the current channel
                             
                             [handles.trace,si,lActualAcqLength]=abfload(filename,'start',segment_size_in_sec*(currentsegment-1),'stop',segment_size_in_sec*currentsegment);
                             set(handles.edit_segment_number,'String',num2str(currentsegment)); % update segment number textbox
@@ -555,11 +564,85 @@ function fun_load_trace_file(filename, ~, currentsegment)
                         
                         
                         
+                    case 8 % ABF v2.0
+                        
+                        % this will open ABF v2 files where channel 1 is
+                        % current in units of nA
+                        
+                        segment_size_in_sec = str2double(get(handles.edit_segment_size_in_sec,'String')); % how big each segment is in seconds
+                        
+                        if currentsegment == 0 % read segment 1 (first 3 sec)
+                                                        
+                            [trace_temp,si,headerstruct]=abf2load(filename,'start',0,'stop',segment_size_in_sec);
+                            set(handles.edit_segment_number,'String','1'); % update segment number textbox
+                            
+                        else % read some other segment #
+                            
+                            [trace_temp,si,headerstruct]=abf2load(filename,'start',segment_size_in_sec*(currentsegment-1),'stop',segment_size_in_sec*currentsegment);
+                            set(handles.edit_segment_number,'String',num2str(currentsegment)); % update segment number textbox
+                            
+                        end
+                        
+                        % NOTE: this code assumes channel 1 is current and
+                        % channel 2 (which is ignored) is voltage
+                        
+                        handles.trace = trace_temp(:,1); % this is the current channel
+                        % voltage_trace = trace_temp(:,2); % this is the voltage channel
+                        clear trace_temp; % clean memory
+                        lActualAcqLength = headerstruct.lActualAcqLength/2; % divide by two because there are two channels
+                        
+                        %%% NOTE!!!
+                        % sometimes the timestep is not quite exact
+                        % instead of 2 us it is 2.000000000001 us
+                        % be careful here
+                        handles.timestep = si*10^(-6); % convert to sec
+                        
+                        handles.trace = transpose(handles.trace); % this data is already in nA, and switch to correct form
+                        handles.time_vector = handles.timestep:handles.timestep:handles.timestep*length(handles.trace); % generate time vector
+                        
+                        numpoints_in_segment = round(segment_size_in_sec/(handles.timestep)); % number of points in a segment
+                        handles.total_number_of_segments = int32(idivide(int32(lActualAcqLength),int32(numpoints_in_segment))); % total number of segments in this ABF file
+                        
+                        for iii=1:handles.total_number_of_segments % generate a cell array to be used in the segment selection popup menu
+                          segment_vector{iii} = num2str(iii);
+                        end
+                        
+                        segment_vector = transpose(segment_vector); % flip it
+                        set(handles.pop_abf_segment_number,'String',segment_vector) % generate new segment selection popup menu
+                        
+%                         assignin('base', 'numpoints_in_segment', numpoints_in_segment)
+%                         assignin('base', 'total_number_of_segments', handles.total_number_of_segments)
+%                         assignin('base', 'trace', handles.trace)
+%                         assignin('base', 'headerstruct', headerstruct)
+                        
+                        if length(handles.trace) == numpoints_in_segment
+                            
+                            handles.file_load_successful = 1; % worked
+                            
+                            if currentsegment == 0 % update current segment number
+                                
+                                set(handles.pop_abf_segment_number,'Value',1)
+                                currentsegment = 1; % current segment is 1
+                                
+                            else
+                                
+                                set(handles.pop_abf_segment_number,'Value',currentsegment) % update popup menu
+                                
+                            end
+                        else
+                            
+                            handles.file_load_successful = 0; % :(
+                        end
+                        
+                        
+                        
+                        
+                        
                         % NOTE: if you want to add new file formats, they should go here as a new case statement %
                         
                     otherwise
                 end
-                
+
                 if handles.file_load_successful == 0
                     
                     set(handles.edit_status,'String','File Loading Error')
@@ -2050,7 +2133,7 @@ function fun_cycle_all(handles)
 
             if handles.file_load_successful == 1 % file loaded successfully
                 type_of_file = get(handles.pop_file_type,'Value');
-                if type_of_file == 5 || type_of_file == 6 % if this is an ABF file or TDMS
+                if type_of_file == 5 || type_of_file == 6 || type_of_file == 8 % if this is an ABF file or TDMS or ABF2.0
                     % this is done to be able to cycle over segments
 
                     filecounter = filecounter + 1; % file is good
@@ -2255,7 +2338,7 @@ function fun_load_par_file(handles, cycleon)
 
             line = fgetl(fid);
             filetypevar = str2double(fgetl(fid)); %% File Type
-            if filetypevar == 1 || filetypevar == 2 || filetypevar == 3 || filetypevar == 4 || filetypevar == 5 || filetypevar == 6 || filetypevar == 7
+            if filetypevar == 1 || filetypevar == 2 || filetypevar == 3 || filetypevar == 4 || filetypevar == 5 || filetypevar == 6 || filetypevar == 7 || filetypevar == 8
                 set(handles.pop_file_type,'Value',filetypevar);
             else
                 set(handles.pop_file_type,'Value',1);
