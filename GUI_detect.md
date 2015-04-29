@@ -1,4 +1,4 @@
-![http://ceesdekkerlab.tudelft.nl/wp-content/uploads/GUI_detect.png](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/GUI_detect.png)
+![GUI_detect](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/GUI_detect.png)
 
 # Quick manual version #
 
@@ -43,19 +43,19 @@ Now the files are ready to analyze. Open the Detect Events script (GUI\_detect) 
     * Event Type: At the bottom of the detection parameter box. Choose from:
       * Down events (normal setting, high salt)
       * Up events (low salt experiments)
-      * Both (intermediate salt levels [Kowalczyk SW, Dekker C. Measurement of the docking time of a DNA molecule onto a solid-state nanopore](see.md) **Note:** This option uses an algorithm which is much slower, than the other two options above and has not been thoroughly tested yet!
+      * Both (intermediate salt levels [Kowalczyk SW, Dekker C. Measurement of the docking time of a DNA molecule onto a solid-state nanopore](http://pubs.acs.org/doi/abs/10.1021/nl301719a) **Note:** This option uses an algorithm which is much slower, than the other two options above and has not been thoroughly tested yet!
     * Iterative Detection: This applies the same detection multiple times to the same file and each time it replaces the duration of detected events in the trace file with the value of the baseline at the start of the event. Then it recalculates the moving average. Because events have effectively been removed, distortions in the moving average are also removed. This function can be useful if you have events very close together or the event rate is high. The more iterations you run the more it should converge to the proper number of detected events (if all parameters are set correctly).
 
   * Baseline (how should we determine the local baseline):
     * Moving Average: The standard option used in analysis.
     * Manual (Initial Guess): Enter a value for the baseline in the text box. The first iteration of the detection will use this value. Subsequent loops will calculate the moving average (on the modified trace).
     * Manual (Locked): Always use the value in the text box as the value of the baseline.
-    * Current Hist Max: Take the maximum value of the current histogram as the baseline value. Set the number of bins such that the resolution is sufficient to provide a good estimate. **Note:** This will not work if there are more points within the events than the baseline in a given trace. The current histogram button will open a plot showing the peaks. This should be used to set the proper binning. ![http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_current.png](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_current.png)
+    * Current Hist Max: Take the maximum value of the current histogram as the baseline value. Set the number of bins such that the resolution is sufficient to provide a good estimate. **Note:** This will not work if there are more points within the events than the baseline in a given trace. The current histogram button will open a plot showing the peaks. This should be used to set the proper binning. ![TR_current](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_current.png)
   * Sigma (How to detect the value of the Standard Deviation / Noise Level):
     * Trace STD: Take the standard deviation of the entire trace. This only works if you have a very stable baseline.
     * Manual (Initial Guess): Enter a value for sigma in the text box. The first loop of the detection will use this value. Subsequent loops will calculate sigma on the global trace (on the modified trace) **Note:** This is to be used for a trace with many events but stable baseline.
     * Manual (Locked): Always use the value in the text box as the value of sigma.
-    * Moving STD Hist Peak: Calculate STD over a local window with size in points given in the text box below. Take the maximum point of the local STD histogram. The STD Hist button will open a plot with these peaks. This should be used to set the proper binning. ![http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_std.png](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_std.png)
+    * Moving STD Hist Peak: Calculate STD over a local window with size in points given in the text box below. Take the maximum point of the local STD histogram. The STD Hist button will open a plot with these peaks. This should be used to set the proper binning. ![TR_std](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_std.png)
     * Moving STD: NOT IMPLEMENTED YET!
 
   * Once your detection parameters are set you should save them by clicking **Create PAR**. This will create a file called ~detect.par which contains all of the detection settings you just chose. To reload these detection settings at a later date, use the **Load PAR** button.
