@@ -1,4 +1,4 @@
-![http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_gaussian.png](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_gaussian.png)
+![TR_gaussian](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_gaussian.png)
 
 If you are interested in determining the peaks (Gaussian fits) of dwell, current, or amplitude histograms you can click on Gaussian Fit to open up the GUI\_gaussian script.
   * First select the Data Input type:
