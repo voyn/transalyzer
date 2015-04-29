@@ -4,7 +4,7 @@ Move all IV curves and noise traces into a new folder. Move each of the traces c
 
 **Note**: The program will ignore any files or folders if their name starts with a tilde ~
 
-![http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_folder_screenshot.png](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_folder_screenshot.png)
+![TR_folder_screenshot](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_folder_screenshot.png)
 
 If you are recording using LabView, set each DATALOG file to be around 10Mb at 500kS/s acquisition. Before starting analysis, the experimental data must be in the proper (temporal) order when you look at the directory in Matlab.
 
@@ -22,7 +22,7 @@ for Match and
 ```
 for Replace. Run this once for every period in your filename. So if you have some file names containing three periods click Rename three times, each time the period closest to the end of the filename will be replaced.
 
-![http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_bulk1.png](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_bulk1.png)
+![TR_bulk1](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_bulk1.png)
 
 Once your files no longer contain periods in their names, select all of your trace files and uncheck Extension(11), check RegEx(1) and uncheck the Include Ext option. The new file names will be shown on the right side of the file list. Files that will have their name changed will be colored green. Three RegEx(1) filters will need to be run:
 
@@ -51,4 +51,4 @@ Replace:
 \1 0\2
 ```
 
-![http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_bulk2.png](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_bulk2.png)
+![TR_bulk2](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/TR_bulk2.png)
