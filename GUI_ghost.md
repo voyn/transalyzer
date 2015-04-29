@@ -1,0 +1,3 @@
+![https://transalyzer.googlecode.com/svn/wiki/GUI_ghost.png](https://transalyzer.googlecode.com/svn/wiki/GUI_ghost.png)
+
+This GUI can be used to examine the effects of filtering on your translocation events. The plot shows the unfiltered trace in green and the filtered event in blue. The ghost button will create an animation of the filter frequency being changed from the start frequency to the stop frequency with a certain step size. Note that there is often a delay between the filtered data and the unfiltered data.
