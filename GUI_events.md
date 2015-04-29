@@ -1,4 +1,4 @@
-![http://ceesdekkerlab.tudelft.nl/wp-content/uploads/GUI_events.png](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/GUI_events.png)
+![GUI_events](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/GUI_events.png)
 
 Now we can go and do statistics on the detected events. Open the GUI\_events m-file and run it.
 **Note:** By default the script will open the rawtrace file. If your rawtrace file is too large Matlab may run out of memory! If you don't want to load the rawtrace unselect Load Rawtrace too in the top right corner.
