@@ -21,7 +21,7 @@ C. Plesa & C. Dekker, [Data analysis methods for solid-state nanopores](http://s
 
 ----
 ### News
-__Mar 25, 2015__ - Unfortunately, Google Code will be shutting down this year. The project will be moving to a new repository soon.
+__April 29, 2015__ - Transalyzer has now moved to GitHub since Google Code will be shutting down later this year.
 
 __Feb 4, 2015__ - First public code release.
 
