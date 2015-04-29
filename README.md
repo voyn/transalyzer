@@ -30,7 +30,7 @@ __Feb 4, 2015__ - First public code release.
 
 Packaged releases:
 
-__Mar 25, 2015__ - Download [Transalyzer RC1b](https://transalyzer.googlecode.com/svn/releases/transalyzer_rc1b.zip) . Added ABF2.0 support and fixed issues with iterative detection.
+__Mar 25, 2015__ - Download latest release [Transalyzer RC1b](https://github.com/voyn/transalyzer/archive/master.zip) . Added ABF2.0 support and fixed issues with iterative detection.
 
 __Feb 4, 2015__ - Release of Transalyzer RC1a.
 
@@ -42,7 +42,16 @@ __Feb 4, 2015__ - Release of Transalyzer RC1a.
 ----
 ### Documentation
 
-* Install
+* [Installation](../wiki/Installation.md)
+* [File Preparation](../wiki/File_Preparation.md)
+* [Guide to GUI\_detect](../wiki/GUI_detect.md)
+* [Guide to GUI\_events](../wiki/GUI_events.md)
+* [Guide to GUI\_eventrate](../wiki/GUI_eventrate.md)
+* [Guide to GUI\_gaussian](../wiki/GUI_gaussian.md)
+* [Guide to GUI\_ghost](../wiki/GUI_ghost.md)
+* [Guide to GUI\_noise](../wiki/GUI_noise.md)
+* [Guide to GUI\_localstructures](../wiki/GUI_localstructures.md)
+* [FAQ](../wiki/FAQ.md)
 
 ----
 ### Requirements
