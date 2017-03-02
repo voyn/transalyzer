@@ -176,7 +176,9 @@ function GUI_eventrate_OpeningFcn(hObject, eventdata, handles, varargin)
 
             % Mean( Mean( local times ) )
             er4 = 1/(mean(averagetimefile));
+            er4_std = 1/(std(averagetimefile));
             set(handles.text_er4,'String',num2str(er4))
+            set(handles.text_er4_std,'String',num2str(er4_std))
 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%%%% new stuff
@@ -189,15 +191,17 @@ function GUI_eventrate_OpeningFcn(hObject, eventdata, handles, varargin)
             handles.eventstarttimediff_experimental = eventstarttimediff_experimental_temp(2:end); % discard first element
             eventstarttimediff_experimental_temp_include_dwell = eventstarttimediff_experimental_temp_include_dwell(2:end); % discard first element
             
-            assignin('base', 'time_between_events_ms', eventstarttimediff_experimental_temp_include_dwell.*1000)
-            assignin('base', 'events_dwell_ms', dwelltimes)
+%             assignin('base', 'time_between_events_ms', eventstarttimediff_experimental_temp_include_dwell.*1000)
+%             assignin('base', 'events_dwell_ms', dwelltimes)
             
             % the largest time
             set(handles.edit_max_time2,'String',num2str(max(handles.eventstarttimediff_experimental)))
 
-            er5 = 1/(mean(handles.eventstarttimediff_experimental));
-
+            er5 = 1./mean((handles.eventstarttimediff_experimental));
+            er5_std = (1./(std(handles.eventstarttimediff_experimental)));
+            
             set(handles.text_er5,'String',num2str(er5))
+            set(handles.text_er5_std,'String',num2str(er5_std))
 
             alphavalue = str2num(get(handles.edit_alpha_CI,'String'));
 
@@ -829,7 +833,7 @@ function button_saveplots_Callback(hObject, eventdata, handles)
     end
 
     newFig = figure;
-    plot_local_delta_time_and_fit(handles, 'sav')
+    plot_local_delta_time_and_fit(handles, 'sav',hObject)
     saveas(newFig, strcat(handles.pathname,'plots', filesep,'plot_event_separation_hist.fig'), 'fig');
     saveas(newFig, strcat(handles.pathname,'plots', filesep,'plot_event_separation_hist_large.png'), 'png');
     set(newFig, 'PaperPositionMode', 'auto');

@@ -265,12 +265,24 @@ function fun_load_trace_file(filename, ~, currentsegment)
                         % load the file
                         [handles.trace, handles.time_vector, handles.timestep, handles.file_load_successful] = readlabviewbinaries(filename);
                         
+                        segment_size_in_sec = length(handles.trace)*handles.timestep;
+                        set(handles.edit_segment_size_in_sec,'String',num2str(segment_size_in_sec)) % set the segment size in the text box
+                        
                         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                         % this is ugly fix for the odd record size problem
                         % in some LabView binary files
-                        handles.trace(handles.trace > 1E20) = [];
-                        handles.trace(handles.trace < -1E20) = [];
-                        handles.trace(abs(handles.trace) < 1E-20) = [];
+                        if ismember(1,handles.trace > 1E20)
+                            handles.trace(handles.trace > 1E20) = [];
+                            display(strcat('Strange large positive current values in file:',filename))
+                        end
+                        if ismember(1,handles.trace < -1E20)
+                            handles.trace(handles.trace < -1E20) = [];
+                            display(strcat('Strange large negative current values in file:',filename))
+                        end
+                        if ismember(1,abs(handles.trace) < 1E-20)
+                            handles.trace(abs(handles.trace) < 1E-20) = [];
+                            display(strcat('Strange small current values in file:',filename))
+                        end
                         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                         
                         % generate the time vector
@@ -634,8 +646,39 @@ function fun_load_trace_file(filename, ~, currentsegment)
                             handles.file_load_successful = 0; % :(
                         end
                         
+                    case 9  % Chimera Logfile
                         
+                        % this will open Chimera Logfiles, where the 
+                        % function readchimdata is taken from the software
+                        % provided by chimera
                         
+                        [handles.trace, handles.time_vector, handles.timestep, handles.file_load_successful] = readchimlogfile(filename);
+                    
+                        segment_size_in_sec = length(handles.trace)*handles.timestep;
+                        set(handles.edit_segment_size_in_sec,'String',num2str(segment_size_in_sec)) % set the segment size in the text box
+                        
+                    case 10 % no time, current file, read time from the Timestep text box and generate time vector with it,
+                            %also commas instead of points in string, need to be replaced
+                        
+                        % try not to use this, it's slow
+                        
+                        fid = fopen(filename); % open file
+                        
+                        if fid > 0
+                            dataread = fscanf(fid, '%c'); % read data
+                            dataread = strrep(dataread,',','.'); %replace commas in string
+                            dataread = str2num(dataread); %convert to numeric array
+                            dataread = dataread.*10; %times 10 to correct for mistake in converting!! 
+                            handles.timestep = str2double(get(handles.edit_timestep,'String'))/1E6; % get timestep from text box
+                            handles.trace = dataread(1,:); %% column 1 is current
+                            handles.time_vector = handles.timestep:handles.timestep:handles.timestep*length(handles.trace);
+                            
+                            handles.file_load_successful = 1; % worked
+                        else
+                            handles.file_load_successful = 0; % :(
+                        end
+                        
+                        fclose(fid); % close it up
                         
                         
                         % NOTE: if you want to add new file formats, they should go here as a new case statement %
@@ -1366,7 +1409,7 @@ function fun_events_detect(plottingon)
                                 icount = icount + 1;
                                 if icount == N + 1 %% if you cant find changeover
                                     icount = N; % keep calm, but FreakOut!!
-                                    disp('problem with finding starting FWHM point of event #',{' '},num2str(event_counter))
+                                    disp(strcat('problem with finding starting FWHM point of event #',{' '},num2str(event_counter)))
                                     break % and break the loop
                                 end
                             end
@@ -1387,7 +1430,7 @@ function fun_events_detect(plottingon)
                                 icountend = icountend - 1;
                                 if icountend == 0 %% if you cant find changeover
                                     icountend = 1; % keep calm, but FreakOut!!
-                                    disp('problem with finding ending FWHM point of event #',{' '},num2str(event_counter))
+                                    disp(strcat('problem with finding ending FWHM point of event #',{' '},num2str(event_counter)))
                                     break % and break the loop
                                 end
                             end
@@ -1458,7 +1501,7 @@ function fun_events_detect(plottingon)
                                 %assignin('base', 'icount', i)
                                 if icountend == 0 %% if you cant find changeover
                                     icountend = 1; % keep calm, but FreakOut!!
-                                    disp('problem with finding ending FWHM point of event #',{' '},num2str(event_counter))
+                                    disp(strcat('problem with finding ending FWHM point of event #',{' '},num2str(event_counter)))
                                     break % and break the loop
                                 end
                             end
@@ -2066,9 +2109,13 @@ function fun_make_new_trace(handles, dir_str, selectoutput) % take only the trac
 
 
     if selectoutput == 0
+        % TODO
+        % is this actually used downstream??
+        % remove??
         % write analysis_rawtrace_baseline file
-        file_str = strcat(dir_str,'analysis_rawtrace_baseline');
-        dlmwrite(file_str, newtrace, 'delimiter', '\n','precision', '%.8f','newline', 'pc');
+        % 7-5-2015 Commented out next two lines - Calin
+        %         file_str = strcat(dir_str,'analysis_rawtrace_baseline');
+        %         dlmwrite(file_str, newtrace, 'delimiter', '\n','precision', '%.8f','newline', 'pc');
 
         % write analysis_events_min_max file
         file_str = strcat(dir_str,'analysis_events_min_max');
@@ -2077,7 +2124,7 @@ function fun_make_new_trace(handles, dir_str, selectoutput) % take only the trac
     end
 
     if selectoutput == 1
-        % write analysis_rawtrace_baseline file
+        % write opennanopore file
         file_str = strcat(dir_str,'OpenNanopore', filesep, 'events.mat');
         newtrace = transpose(newtrace);
         save(file_str, 'newtrace');
@@ -2119,7 +2166,7 @@ function fun_cycle_all(handles)
         counter_num = i - 2; % same as i but counting from 1
         filezname = char(listofitems(i).name); % get current name
 
-        if listofitems(i).isdir == 0 && filezname(1,1) ~= '~' && ~strcmp(filezname(end-5:end),'_index') % not folder or files starting with ~
+        if listofitems(i).isdir == 0 && filezname(1,1) ~= '~' && ~strcmp(filezname(end-5:end),'_index') && ~strcmp(filezname(end-2:end),'mat') % not folder or files starting with ~ or ending with _index (TDMS) or mat (Chimera)
 
             set(handles.listbox_main,'Value',i); % refresh listbox selection to current file
 
@@ -2338,7 +2385,7 @@ function fun_load_par_file(handles, cycleon)
 
             line = fgetl(fid);
             filetypevar = str2double(fgetl(fid)); %% File Type
-            if filetypevar == 1 || filetypevar == 2 || filetypevar == 3 || filetypevar == 4 || filetypevar == 5 || filetypevar == 6 || filetypevar == 7 || filetypevar == 8
+            if filetypevar > 0 || ~mod(value,1) % check if integer larger than zero
                 set(handles.pop_file_type,'Value',filetypevar);
             else
                 set(handles.pop_file_type,'Value',1);
@@ -2431,7 +2478,7 @@ function fun_events_add_to_master_file()
         extra_data_fields = 4; % add four more columns
         temp_storage = cell(length(handles.event_start_trace_new),extra_data_fields);
 
-        if get(handles.pop_file_type,'Value') == 5 % Axon binaries
+        if get(handles.pop_file_type,'Value') == 5 || get(handles.pop_file_type,'Value') == 8 % Axon binaries
             temp_storage(:,1) = {strcat('"',filename_str,' segment ',get(handles.edit_segment_number,'String'),'"')}; % name of the file, append segment #
             % file number*1000000 + segment number
             fileidnum = 1000000*str2double(get(handles.edit_file_number,'String')) + str2double(get(handles.edit_segment_number,'String'));
@@ -3221,6 +3268,11 @@ function button_dump_variables_to_matlab_Callback(hObject, eventdata, handles)
     if isfield(handles,'event_startstop_trace')
         assignin('base', 'event_startstop_trace', handles.event_startstop_trace)
     end
+    if isfield(handles,'filtered_trace_events_removed')
+        assignin('base', 'filtered_trace_events_removed', handles.filtered_trace_events_removed)
+    end
+    
+    
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

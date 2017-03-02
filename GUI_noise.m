@@ -636,6 +636,7 @@ function t3load_Callback(hObject, eventdata, handles)
             if get(handles.t3mult,'Value') == 1
                 t3trace = handles.t3traceraw.*10;
             end
+            t3trace=t3trace.*1000;
         case 2 % ATF file
             fid = fopen(strcat(handles.t3pathname,handles.t3filename));
             if fid > 0 % opened
@@ -645,7 +646,7 @@ function t3load_Callback(hObject, eventdata, handles)
                 fffnoise = fscanf(fid, '%f\t%f', [2 inf]);
                 
                 t3timestep = fffnoise(1,3)-fffnoise(1,2);
-                t3trace = fffnoise(2,:)./1000; % in nA
+                t3trace = fffnoise(2,:); % in pA
             end
             fclose(fid);
         case 3 % Text file with two columns, same as above but without header
@@ -653,7 +654,7 @@ function t3load_Callback(hObject, eventdata, handles)
             if fid > 0
                 fffnoise = fscanf(fid, '%f\t%f', [2 inf]);
                 t3timestep = fffnoise(1,3)-fffnoise(1,2); %% column 1 is time
-                t3trace = fffnoise(2,:); %% column 2 is current
+                t3trace = fffnoise(2,:).*1000; %% column 2 is current
             end
             fclose(fid);
         case 4 % ABF file
@@ -663,7 +664,7 @@ function t3load_Callback(hObject, eventdata, handles)
             [t3trace,si,lActualAcqLength]=abfload(strcat(handles.t3pathname,handles.t3filename),'start',start_time,'stop',segment_size_in_sec);
             
             t3timestep = si*10^(-6); % convert to sec
-            t3trace = transpose(t3trace/1000); % convert to nA, and switch to correct form
+            t3trace = transpose(t3trace); % keep in nA, and switch to correct form
         otherwise
     end
     handles.t3timestep = t3timestep;
@@ -736,7 +737,7 @@ function t3plotty(handles, location)
     end
     loglog(handles.t3fGn,handles.t3PxxGn,'-b')
     xlabel('Frequency (Hz)')
-    ylabel('PSD (nA^2/Hz)')  
+    ylabel('PSD (pA^2/Hz)')  
     if get(handles.lockaxes,'Value') == 1
         axis([lxmin lxmax lymin lymax]);
     end

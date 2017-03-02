@@ -583,6 +583,7 @@ function fun_plot_event(location, handles) % plot events in the GUI
         else % put peak dwell time into box
 %             set(handles.edit_peakdwelldata,'String',num2str([peak_plot_info(:,3);peak_plot_info(:,4)]))
             set(handles.edit_peakdwelldata,'String',num2str(peak_plot_info(:,3)))
+%           set(handles.edit_peakdwelldata,'String',strcat(num2str(peak_plot_info(:,3)),{' '},num2str(peak_plot_info(:,8))))
 %             clipboard('copy', num2str(peak_plot_info(:,3)))
 %             clipboard('copy', [num2str(peak_plot_info(1,3)),java.lang.System.getProperty('line.separator').char,num2str(peak_plot_info(1,4))])
         end
@@ -895,7 +896,7 @@ function peak_plot_info = fun_find_local_struct(eventid, type_analysis, handles)
                     end
                     
                 else
-                    peak_plot_info(peak_counter,:) = [peak_counter peakLoc(j) peakFWHM timeinterp_start valueinterp_start timeinterp_end valueinterp_end];
+                    peak_plot_info(peak_counter,:) = [peak_counter peakLoc(j) peakFWHM timeinterp_start valueinterp_start timeinterp_end valueinterp_end peakMag];
                     % 1 - peakid
                     % 2 - peakpos_ind
                     % 3 - peak FWHM   
@@ -903,6 +904,7 @@ function peak_plot_info = fun_find_local_struct(eventid, type_analysis, handles)
                     % 5 - peak FWHM start mag
                     % 6 - peak FWHM end time
                     % 7 - peak FWHM end mag
+                    % 8 - peak amp nA
                 end
                 peak_counter = peak_counter + 1;
             end
@@ -1141,17 +1143,17 @@ function fun_load_parameters(location, handles)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function button_load_ana_Callback(hObject, ~, ~)
+function button_load_ana_Callback(hObject, ~, handles)
     
     loadpath = uigetdir(pwd, 'Pick a Directory');
     
-    fun_load_analysis_files(loadpath)
-    
-    handles=guidata(gcbo); % update local handles
-
     % read in par file
     
     fun_load_parameters(strcat(loadpath,filesep,'~local_structure_analysis.par'), handles)
+    
+    handles=guidata(gcbo); % update local handles
+    
+    fun_load_analysis_files(loadpath)
     
     handles=guidata(gcbo); % update local handles
 
