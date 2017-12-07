@@ -4,16 +4,16 @@ This GUI can be used to find and characterize spikes present within translocatio
 
 The following describes the typical procedure for detection of spikes within events. Note that peaks within events can be due to noise, folding, DNA knots, co-translocation of multiple molecules.
 
-* In GUI_events select a population of DNA events you wish to analyse. In general, for the analysis. Try to remve super short events.
+* In GUI_events select a population of DNA events you wish to analyse and save this population to a new events database. In general, for the analysis. Try to remove super short events.
 * In GUI_events use the current histogram to determine the level of the dsDNA blockade (I_1) for your experiment. Note: the program assumes no significant changes in the value of I_1 over the course of the experiment.
 * Start GUI_localstructures and enter the value of the DNA blockade (I_1) into the Baseline text box.
-* Choose "Open Events" and select an analysis_events file to analyse.
+* Choose "Open Events" and select an analysis_events file to analyse. This is the events file you created in step 1.
 * Click "Region Analysis" in the "1. Calc selection param" box. This calculates the Normalized Integral between I_1 and I_2 for all events, as described in the publication.
 * A histogram of the Normalized Integral between I_1 and I_2 will be plotted. Values close to 1 represent fully folded events, while values close to 0 are unfolded events. Those in-between represent partially folded event or events with spikes. Typically short duration spikes do not contribute much to the normalized integral.
-* In the "2. Classify Events" box, select the highest Normalized Integral event to be analysed under "Region Int". For events with short spikes we often set the Max limit between 0.2 and 0.4. The goal here is the filter out highly folded events from the data set.
+* In the "2. Classify Events" box, select the highest Normalized Integral event to be analysed under "Region Int". For events with short spikes, we often set the Max limit between 0.2 and 0.4. The goal here is the filter out highly folded events from the data set.
 * Click select.
 * Click "Assign" to classify these events as "Unfolded - Unsorted".
-* In box "4. Peak Finder" select a Threshold and Selection factor. The Threshold sets the minimum amplitude for a peak to be detected in units of I_1 relative to the open pore current I_0. So a Threshold of 2.5 will mean peak's over 2.5xI_1 from the open pore baseline will be detected. The Selection factor sets how far above the surrounding data a peak must be to be counted. See documentaion for the peakfinder function: [https://www.mathworks.com/matlabcentral/fileexchange/25500-peakfinder-x0--sel--thresh--extrema--includeendpoints--interpolate-](https://www.mathworks.com/matlabcentral/fileexchange/25500-peakfinder-x0--sel--thresh--extrema--includeendpoints--interpolate-)
+* In box "4. Peak Finder" select a Threshold and Selection factor. The Threshold sets the minimum amplitude for a peak to be detected in units of I_1 relative to the open pore current I_0. So a Threshold of 2.5 will mean that peak's with an amplitude over 2.5xI_1 from the open pore baseline will be detected. The Selection factor sets how far above the surrounding data a peak must be to be counted. See documentaion for the peakfinder function: [https://www.mathworks.com/matlabcentral/fileexchange/25500-peakfinder-x0--sel--thresh--extrema--includeendpoints--interpolate-](https://www.mathworks.com/matlabcentral/fileexchange/25500-peakfinder-x0--sel--thresh--extrema--includeendpoints--interpolate-)
 * Click "Detect Local Structures". This detects all peaks using the given settings in all events.
 * In box "5. Peak Stats and Plot Gen Panel", under Analyse Peaks from select "Unfolded - All". This will plot only a subset of the peaks based on how events have been classified.
 * Now a number of plots can be generated:
