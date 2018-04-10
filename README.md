@@ -161,7 +161,8 @@ Transalyzer uses various functions and code written by different people and prov
 | [fwhm](http://www.mathworks.nl/matlabcentral/fileexchange/10590-fwhm) | Patrick Egan | BSD |
 | [TDMS Reader](http://www.mathworks.nl/matlabcentral/fileexchange/30023-tdms-reader) | Jim Hokanson | BSD |
 
-Additionally I would like to thank the following people for code contributions, bug reports, ideas, and productive discussions: 
+Additionally I would like to thank the following people for code contributions, bug reports, ideas, and productive discussions:
+ * Chun Heung Wong
  * Auke Booij
  * Mathijs Rozemuller
  * [Nima Arjmandi](http://arjmandi.org) (See [Improved Algorithms for Nanopore Signal Processing](http://arxiv.org/abs/1207.2319))

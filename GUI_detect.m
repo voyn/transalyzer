@@ -61,7 +61,7 @@ function GUI_detect_OpeningFcn(hObject, eventdata, handles, varargin)
     % Update handles structure
     guidata(hObject, handles);
 
-    if nargin == 3,
+    if nargin == 3
         initial_dir = pwd; % current directory is initial directory
     elseif nargin > 4 % otherwise try to open specified folder
         if strcmpi(varargin{1},'dir')
@@ -1376,10 +1376,12 @@ function fun_events_detect(plottingon)
                         if length(minindex) > 1 % more than 1 local minima/maxima point
 
                             if up_or_down == 1 % up event
+                                %normalization issue pointed out by C.H. Wong: change mean to max
                                 amplitude_minima_maxima = mean(event_trace(minindex(1):max(minindex))) - baseline; % amplitude calculated only between first and last maxima
                                 minmax_index = find(event_trace == max(event_trace));
                                 event_trace_norm = (event_trace - baseline) / amplitude_minima_maxima; % for FWHM calc
                             else % down event
+                                %normalization issue pointed out by C.H. Wong: change mean to max
                                 amplitude_minima_maxima = baseline - mean(event_trace(minindex(1):max(minindex))); % amplitude calculated only between first and last minima
                                 minmax_index = find(event_trace == min(event_trace));
                                 event_trace_norm = -(event_trace - baseline) / amplitude_minima_maxima; % for FWHM calc
@@ -2001,12 +2003,22 @@ if isfield(handles,'event_trace_master') % there are events in the master file
     
     % write analysis_rawtrace file
     file_str = strcat(dir_str,'analysis_rawtrace');
-    dlmwrite(file_str, handles.event_trace_master, 'delimiter', '\n','precision', '%.8f','newline', 'pc');
+    %OLD CODE slow:
+    % dlmwrite(file_str, handles.event_trace_master, 'delimiter', '\n','precision', '%.8f','newline', 'pc');
+    %speed-up suggested by C.H. Wong:
+    fid = fopen(file_str,'w');
+    fprintf(fid,'%.8f\n',handles.event_trace_master);
+    fclose(fid);
     
     if get(handles.check_save_unfiltered_trace,'Value') % save unfiltered trace
         % write analysis_unfiltered_rawtrace file
         file_str = strcat(dir_str,'analysis_unfiltered_rawtrace');
-        dlmwrite(file_str, handles.event_unfiltered_trace_master, 'delimiter', '\n','precision', '%.8f','newline', 'pc');
+        %OLD CODE slow:
+        %dlmwrite(file_str, handles.event_unfiltered_trace_master, 'delimiter', '\n','precision', '%.8f','newline', 'pc');
+        %speed-up suggested by C.H. Wong:
+        fid = fopen(file_str,'w');
+        fprintf(fid,'%.8f\n',handles.event_unfiltered_trace_master);
+        fclose(fid);
     end
     
     if get(handles.check_make_OpenNanopore_files,'Value') == 1
