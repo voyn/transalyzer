@@ -1360,6 +1360,15 @@ function fun_events_detect(plottingon)
                             [lmval,minindex] = lmax(event_trace, 0); % calc local maxima
                             event_max = max(event_trace) - baseline; % event max
 
+                            %fixed issue with maxima outside detection level, thanks to C.H. Wong:
+                            correct_ind = find(lmval > detectionlevel);
+                            if isempty(correct_ind)
+                                disp('No local maxima found in event outside of detection level')
+                            else
+                                lmval = lmval(correct_ind);
+                                minindex = minindex(correct_ind);
+                            end
+
                         else % down events
 
                             %get detection level at crossover point
@@ -1367,6 +1376,15 @@ function fun_events_detect(plottingon)
 
                             [lmval,minindex] = lmin(event_trace, 0);  % calc local minima
                             event_max = baseline - min(event_trace); % event max
+
+                            %fixed issue with minima outside detection level, thanks to C.H. Wong:
+                            correct_ind = find(lmval < detectionlevel);
+                            if isempty(correct_ind)
+                                disp('No local minima found in event outside of detection level')
+                            else
+                                lmval = lmval(correct_ind);
+                                minindex = minindex(correct_ind);
+                            end
 
                         end
 
