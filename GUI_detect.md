@@ -1,4 +1,4 @@
-![GUI_detect](http://ceesdekkerlab.tudelft.nl/wp-content/uploads/GUI_detect.png)
+![GUI_detect](https://github.com/voyn/transalyzer/blob/wiki/GUI_detect.png?raw=true)
 
 # Quick manual version #
 
